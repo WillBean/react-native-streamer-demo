@@ -1,0 +1,6 @@
+rootProject.name = 'RBLiveApplication'
+
+include ':app'
+
+include ':react-native-streamer'
+project(':react-native-streamer').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-streamer/android/app/')

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\Will Bean\.android\build-cache\fa0793671ef00a561c310406e80c40dcf82ec9ca\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="99941aaaf86dc5e525cd9208c2f7c9a624f4f004">
+        <dex dex="J:\graduation\RBLiveApplication\android\app\build\intermediates\pre-dexed\debug\classes_2573c0e18a659216e011a348758698692161fe30.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="J:\graduation\RBLiveApplication\node_modules\react-native-streamer\android\app\build\intermediates\bundles\default\libs\ksylive.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="320e9d6a6cc3be3e9ea2eb7870609a412d907c22">
+        <dex dex="J:\graduation\RBLiveApplication\android\app\build\intermediates\pre-dexed\debug\ksylive_09710d366fea3ccfd28551635d89ea22ddd70fd7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="J:\graduation\RBLiveApplication\node_modules\react-native-streamer\android\app\build\intermediates\bundles\default\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="a676ce4747a2d2b13d264cc0382887c542fde482">
+        <dex dex="J:\graduation\RBLiveApplication\android\app\build\intermediates\pre-dexed\debug\classes_1015594147a879a45e4afcd295b60adce6b1bb2d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Will Bean\.android\build-cache\fa0793671ef00a561c310406e80c40dcf82ec9ca\output\jars\libs\infer-annotations-4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
+        <dex dex="J:\graduation\RBLiveApplication\android\app\build\intermediates\pre-dexed\debug\infer-annotations-4.0_812acbd62e66ca422244323b7448b322acf85599.jar" />
+    </item>
+
+</items>
