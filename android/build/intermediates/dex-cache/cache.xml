@@ -3,39 +3,210 @@
 
     <item
         is-multidex="false"
-        jar="C:\Users\Will Bean\.android\build-cache\fa0793671ef00a561c310406e80c40dcf82ec9ca\output\jars\classes.jar"
+        jar="/Users/bytedance/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
         jumboMode="false"
         optimize="true"
         revision="27.0.1"
-        sha1="99941aaaf86dc5e525cd9208c2f7c9a624f4f004">
-        <dex dex="J:\graduation\RBLiveApplication\android\app\build\intermediates\pre-dexed\debug\classes_2573c0e18a659216e011a348758698692161fe30.jar" />
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_52273f6540a5381ce4517dd911c1ff3fc9692e4b.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="J:\graduation\RBLiveApplication\node_modules\react-native-streamer\android\app\build\intermediates\bundles\default\libs\ksylive.jar"
+        jar="/Users/bytedance/.android/build-cache/660cf04f1091dbe4a2d1695f4df989151bda6709/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="27.0.1"
-        sha1="320e9d6a6cc3be3e9ea2eb7870609a412d907c22">
-        <dex dex="J:\graduation\RBLiveApplication\android\app\build\intermediates\pre-dexed\debug\ksylive_09710d366fea3ccfd28551635d89ea22ddd70fd7.jar" />
+        sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/classes_7d26fd9cc10eaf1730060f714a698699fb312267.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="J:\graduation\RBLiveApplication\node_modules\react-native-streamer\android\app\build\intermediates\bundles\default\classes.jar"
+        jar="/Users/bytedance/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
         jumboMode="false"
         optimize="true"
         revision="27.0.1"
-        sha1="a676ce4747a2d2b13d264cc0382887c542fde482">
-        <dex dex="J:\graduation\RBLiveApplication\android\app\build\intermediates\pre-dexed\debug\classes_1015594147a879a45e4afcd295b60adce6b1bb2d.jar" />
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1_e116b2f2471cb77a266e56dc3ee2742a4a32f6a6.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Will Bean\.android\build-cache\fa0793671ef00a561c310406e80c40dcf82ec9ca\output\jars\libs\infer-annotations-4.0.jar"
+        jar="/Users/bytedance/.android/build-cache/d3e0bf1401dd373a8324063d307e1470aeaf7b1e/output/jars/libs/infer-annotations-4.0.jar"
         jumboMode="false"
         optimize="true"
         revision="27.0.1"
         sha1="9809e90be788acdb479b2b44e2112f3295a03068">
-        <dex dex="J:\graduation\RBLiveApplication\android\app\build\intermediates\pre-dexed\debug\infer-annotations-4.0_812acbd62e66ca422244323b7448b322acf85599.jar" />
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_23b65456e933594b9518a116e88a38508f1ec8c4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bytedance/.android/build-cache/7116181645422f6cc2280c024e1158adc0eb94a4/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="48c7f54c2515a2312d3a4481d10c43fbb807f3af">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/classes_31814b1ae76c3964326f1e2382f4f6c010c268af.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bytedance/.android/build-cache/a8f2c37fe08d076442429850a6a44215ca2c111c/output/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_baa21bf24ce982c70508f1cd94fdfb830daa018b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bytedance/.android/build-cache/5606ca83de37daac3c7b9c30fe935f83e288501d/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/classes_bfe2ea810f1795cb83465ebd4a1d4fd8228706fa.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bytedance/.android/build-cache/2ef5dc3dbd48872fb1618f6d069886e2eff3572a/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/classes_49d7d9de684b39d02abe25671440b10facc29da5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bytedance/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_b71efc1e6b10b29938948679c25216e6a1207447.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bytedance/.android/build-cache/d3e0bf1401dd373a8324063d307e1470aeaf7b1e/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="99941aaaf86dc5e525cd9208c2f7c9a624f4f004">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/classes_3c4c33e685f89622ec056c2e473968aabdb92a0d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bytedance/gradution/react-native-streamer-demo/node_modules/react-native-streamer/android/app/build/intermediates/bundles/default/libs/ksylive.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="320e9d6a6cc3be3e9ea2eb7870609a412d907c22">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/ksylive_ed3f0b6f027a06b96dff80d2afbd06f4567603f6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bytedance/.android/build-cache/920ac6a2f982cfe790f97026a7f2dbbcdbb6d8a3/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/classes_3b7aebc814a1c2dd7574c16e894cdcb7fe20628a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bytedance/.android/build-cache/2a376fed06789e761f9504cd4c70ea7116c64a94/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/classes_5d8e793e0d1ae8f516d79c096f70bd77f016ed61.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bytedance/gradution/react-native-streamer-demo/node_modules/react-native-streamer/android/app/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="a676ce4747a2d2b13d264cc0382887c542fde482">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/classes_21625043d7a1cc4b2b86fdce142ec54352d98340.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bytedance/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_468c035f3678bd320bfbcbc71b27836eb279fc2c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bytedance/.android/build-cache/b872aeaddc6cb927c87839088cd3ab8da1b7b88e/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="fe85b87215e405f5917d40ae4960488ac9224b74">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/classes_a8e55ea3799751e98fcba3edb30819826a095158.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bytedance/.android/build-cache/455f4cf204ad97b51aa539691aad4091a2595411/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="c03c08c9934b23c8c09c803345ec51a74119127b">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/classes_4e04fc6f7754eb646fc56c66bf71ce30ad397d60.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bytedance/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_817c38bef60cd4b566cf376a03822c852d93126e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bytedance/.android/build-cache/a8f2c37fe08d076442429850a6a44215ca2c111c/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/classes_79a21c115ceca98e7e72a6a86d40a8a961bac6ba.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bytedance/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-urlconnection/3.6.0/3f9b16b774f2c36cfd86dd2053d0b3059531dacc/okhttp-urlconnection-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.6.0_c3a7dad81da5ed7fa60c788acda66c775d8de317.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bytedance/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.6.0/69edde9fc4b01c9fd51d25b83428837478c27254/okhttp-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/okhttp-3.6.0_799adfb51d0dff4638e993907f4619d5da4a9598.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bytedance/.gradle/caches/modules-2/files-2.1/com.facebook.fbui.textlayoutbuilder/staticlayout-proxy/1.0/f162442a19fff13995fbd51ba414d9ee05579080/staticlayout-proxy-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_ba5064ea895835f72743cc0fca9619c5953494c2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/bytedance/.android/build-cache/8c62349c3e453d9ba3540b86df34288e93934d77/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.1"
+        sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
+        <dex dex="/Users/bytedance/gradution/react-native-streamer-demo/android/app/build/intermediates/pre-dexed/debug/classes_e2fb85f3e04e72923cc404018945ed975ddb9168.jar" />
     </item>
 
 </items>
