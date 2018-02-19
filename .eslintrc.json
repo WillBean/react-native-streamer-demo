@@ -14,6 +14,11 @@
     "no-console": 0,
     "react/forbid-prop-types": [0, { "forbid": ["any", "array", "object"] }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "no-use-before-define": 0
+    "no-use-before-define": 0,
+    "no-plusplus": 0,
+    "react/jsx-no-bind": 0,
+    "no-restricted-syntax": 0,
+    "guard-for-in": 0,
+    "react/jsx-boolean-value": 0
   }
 }

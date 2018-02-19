@@ -45,6 +45,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ABCEFCC7923C4ABB9918D03F /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C81AAC40D2C94AD89F75AE31 /* libRNImagePicker.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		DFB91027C61F422799E4019F /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA16B45237174ADFAB5EA940 /* libBVLinearGradient.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -208,6 +209,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = 9936F32F1F5F2E5B0010BF04;
 			remoteInfo = "privatedata-tvOS";
+		};
+		2B72FA5B20382B32006D1F8E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63008BDECDCD46B4B90639E1 /* BVLinearGradient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = BVLinearGradient;
+		};
+		2B72FA5D20382B32006D1F8E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63008BDECDCD46B4B90639E1 /* BVLinearGradient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 64AA15081EF7F30100718508;
+			remoteInfo = "BVLinearGradient-tvOS";
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -387,6 +402,7 @@
 		2D02E4901E0B4A5D006451C7 /* RBLiveApplication-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RBLiveApplication-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A2008620E3347C3986F3FAF /* ReactNativeStreamer.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeStreamer.xcodeproj; path = "../node_modules/react-native-streamer/ios/ReactNativeStreamer.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		63008BDECDCD46B4B90639E1 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		65273C43F75446A3A95C0266 /* frameworkTest-tvOS.app */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "frameworkTest-tvOS.app"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -396,6 +412,7 @@
 		C06997AC7D3C4EC68A8F387F /* frameworkTest.app */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.application; path = frameworkTest.app; sourceTree = "<group>"; };
 		C81AAC40D2C94AD89F75AE31 /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
 		F69751BE56EA42ACA20F587C /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
+		FA16B45237174ADFAB5EA940 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -430,6 +447,7 @@
 				2B6C35DDF4024BFE82F8FCDD /* libReactNativeNavigation.a in Frameworks */,
 				72819CB5407D4C21BBD1A558 /* libRCTActionSheet.a in Frameworks */,
 				214379C8E9614526BE018BCC /* libReactNativeStreamer.a in Frameworks */,
+				DFB91027C61F422799E4019F /* libBVLinearGradient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,6 +609,7 @@
 				C06997AC7D3C4EC68A8F387F /* frameworkTest.app */,
 				65273C43F75446A3A95C0266 /* frameworkTest-tvOS.app */,
 				13FB8488FB1E4785A43CB106 /* libReactNativeStreamer.a */,
+				FA16B45237174ADFAB5EA940 /* libBVLinearGradient.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -618,6 +637,15 @@
 				2BC3C29520305CBF004561BE /* libksygpulive.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2B72FA5720382B32006D1F8E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2B72FA5C20382B32006D1F8E /* libBVLinearGradient.a */,
+				2B72FA5E20382B32006D1F8E /* libBVLinearGradient.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
@@ -656,6 +684,7 @@
 				AE58A85C8D3F4A9AA5C8AB07 /* RNImagePicker.xcodeproj */,
 				F69751BE56EA42ACA20F587C /* ReactNativeNavigation.xcodeproj */,
 				3A2008620E3347C3986F3FAF /* ReactNativeStreamer.xcodeproj */,
+				63008BDECDCD46B4B90639E1 /* BVLinearGradient.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -819,6 +848,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 2B72FA5720382B32006D1F8E /* Products */;
+					ProjectRef = 63008BDECDCD46B4B90639E1 /* BVLinearGradient.xcodeproj */;
+				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -1043,6 +1076,20 @@
 			fileType = archive.ar;
 			path = "libprivatedata-tvOS.a";
 			remoteRef = 2B0362DC202DD939007DCDDE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2B72FA5C20382B32006D1F8E /* libBVLinearGradient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBVLinearGradient.a;
+			remoteRef = 2B72FA5B20382B32006D1F8E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2B72FA5E20382B32006D1F8E /* libBVLinearGradient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBVLinearGradient.a;
+			remoteRef = 2B72FA5D20382B32006D1F8E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */ = {
@@ -1323,12 +1370,14 @@
 					"$(SRCROOT)/../node_modules/react-native-streamer/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-streamer/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-streamer/ios/ReactNativeStreamer",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = RBLiveApplicationTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1364,12 +1413,14 @@
 					"$(SRCROOT)/../node_modules/react-native-streamer/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-streamer/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-streamer/ios/ReactNativeStreamer",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = RBLiveApplicationTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1410,6 +1461,7 @@
 					"$(SRCROOT)/../node_modules/react-native-streamer/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-streamer/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-streamer/ios/ReactNativeStreamer",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = RBLiveApplication/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
@@ -1449,6 +1501,7 @@
 					"$(SRCROOT)/../node_modules/react-native-streamer/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-streamer/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-streamer/ios/ReactNativeStreamer",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = RBLiveApplication/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
@@ -1491,11 +1544,13 @@
 					"$(SRCROOT)/../node_modules/react-native-streamer/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-streamer/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-streamer/ios/ReactNativeStreamer",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = "RBLiveApplication-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1541,11 +1596,13 @@
 					"$(SRCROOT)/../node_modules/react-native-streamer/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-streamer/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-streamer/ios/ReactNativeStreamer",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = "RBLiveApplication-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1586,6 +1643,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.RBLiveApplication-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1610,6 +1668,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
