@@ -3,6 +3,7 @@ import {
   View,
   Text,
   Image,
+  Alert,
   TouchableHighlight,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -10,6 +11,7 @@ import ImagePicker from 'react-native-image-picker';
 
 import style from './style';
 import { calculatePixel } from '../../common/util/tools';
+import { fetchUserUploadAvatar } from '../../common/api/users';
 
 export default class Account extends Component<{}> {
   constructor(props) {
@@ -29,9 +31,9 @@ export default class Account extends Component<{}> {
       cancelButtonTitle: '取消',
       takePhotoButtonTitle: '拍照',
       chooseFromLibraryButtonTitle: '从相册选取',
-      maxWidth: calculatePixel(180),
-      maxHeight: calculatePixel(180),
-      quality: 0.8,
+      maxWidth: calculatePixel(360),
+      maxHeight: calculatePixel(360),
+      quality: 0.95,
     };
     ImagePicker.showImagePicker(options, (response) => {
       console.log('Response = ', response);
@@ -43,14 +45,28 @@ export default class Account extends Component<{}> {
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
       } else {
-        const source = { uri: response.uri };
-
-        // You can also display the image using data:
-        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+        const { uri, data: d, fileName } = response;
+        const source = { uri };
 
         this.setState({
           avatarSource: source,
         });
+
+        const body = new FormData(); // eslint-disable-line
+        body.append('imageData', d);
+        body.append('filename', fileName);
+        fetchUserUploadAvatar(body)
+          .then(res => res.json())
+          .then((data) => {
+            if (data.code === 0) {
+              console.log(data);
+            } else {
+              Alert.alert(data.msg);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     });
   }

@@ -6,7 +6,9 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
+import { observer, inject } from 'mobx-react';
 import Swiper from 'react-native-swiper';
+import PropTypes from 'prop-types';
 import LinearGradient from 'react-native-linear-gradient';
 
 import style from './style';
@@ -21,7 +23,24 @@ function formatCards(cards) {
   return newCards;
 }
 
+@inject('liveState')
+@observer
 export default class Home extends Component<{}> {
+  static propTypes = {
+    liveState: PropTypes.shape({
+      list: PropTypes.array,
+      fetch: PropTypes.func,
+    }),
+  }
+
+  static defaultProps = {
+    liveState: {},
+  }
+
+  componentWillMount() {
+    this.props.liveState.fetch();
+  }
+
   renderTabBar = () => {
     const tabs = ['热门', '最新', '时尚', '热舞', '抖音'];
 
@@ -59,13 +78,8 @@ export default class Home extends Component<{}> {
     const datas = [
       { img: 'http://p1.music.126.net/Pt6SIKQLUXXTJ7T6ewU9EQ==/19087521858270261.jpg' },
       { img: 'http://image13-c.poco.cn/mypoco/qing/20120828/13/2140935331091696685_500x411_220.jpg' },
-      { img: 'http://image13-c.poco.cn/mypoco/qing/20120828/13/2140935331091696685_500x411_220.jpg' },
-      { img: 'http://image13-c.poco.cn/mypoco/qing/20120828/13/2140935331091696685_500x411_220.jpg' },
       { img: 'http://a.hiphotos.baidu.com/baike/pic/item/d4628535e5dde711b8f52eabaeefce1b9d166143.jpg' },
-      { img: 'http://a.hiphotos.baidu.com/baike/pic/item/d4628535e5dde711b8f52eabaeefce1b9d166143.jpg' },
-      { img: 'http://a.hiphotos.baidu.com/baike/pic/item/d4628535e5dde711b8f52eabaeefce1b9d166143.jpg' },
-      { img: 'http://a.hiphotos.baidu.com/baike/pic/item/d4628535e5dde711b8f52eabaeefce1b9d166143.jpg' },
-    ]
+    ];
     // const ds = datasource.cloneWithPages(data.get('banner').toArray());
     return (
       <View style={style.swiperContainer}>
@@ -92,12 +106,12 @@ export default class Home extends Component<{}> {
   }
 
   renderCardList() {
-    const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    const newCards = formatCards(cards);
+    const { list } = this.props.liveState;
+    const cards = formatCards(list);
 
     return (
       <View style={style.cardListCont}>
-        {newCards.map(row => (
+        {cards.map(row => (
           <View key={Math.random()} style={style.listRow}>
             {row.map((card) => {
               if (card) {

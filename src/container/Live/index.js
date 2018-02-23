@@ -4,30 +4,32 @@ import {
   Image,
   Keyboard,
   Animated,
-  TextInput,
   ScrollView,
   TouchableOpacity,
   View,
   Slider,
   Switch,
   Picker,
+  Alert,
 } from 'react-native';
 import { Streamer, StreamerMethod, StreamerConstants } from 'react-native-streamer';
-import LinearGradient from 'react-native-linear-gradient';
-import ImagePicker from 'react-native-image-picker';
 import PropTypes from 'prop-types';
+import { observer, inject } from 'mobx-react';
 
 import styles from './style';
+import Message from '../../component/Message';
+import Configure from '../../component/Configure';
 import audioImg from '../../images/audio.png';
 import closeImg from '../../images/close.png';
 import toggleImg from '../../images/toggle.png';
 import beautifyImg from '../../images/beautify.png';
-import { calculatePixel } from '../../common/util/tools';
+import { fetchLivePrepare, fetchLivePlay } from '../../common/api/lives';
 import {
   pushStreamUrl,
   beautifyGrindDefault,
   beautifyRuddyDefault,
   beautifyWhitenDefault,
+  BACK_END_SOCKET_SERVER_URL,
 } from '../../common/config';
 
 function setBeatifyConfig(grind, whiten, ruddy) {
@@ -36,19 +38,35 @@ function setBeatifyConfig(grind, whiten, ruddy) {
   StreamerMethod.setRuddyRatio(ruddy);
 }
 
+@inject('userState', 'liveState', 'messageState')
+@observer
 export default class Live extends Component<{}> {
   static propTypes = {
     navigator: PropTypes.object,
+    userState: PropTypes.shape({
+      username: PropTypes.string,
+      avatarImg: PropTypes.string,
+      accessToken: PropTypes.string,
+    }),
+    liveState: PropTypes.shape({
+      list: PropTypes.array,
+    }),
+    messageState: PropTypes.shape({
+      number: PropTypes.number,
+      push: PropTypes.func,
+    }),
   };
 
   static defaultProps = {
     navigator: {},
+    userState: {},
+    liveState: {},
+    messageState: {},
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      coverSource: null,
       liveStatus: 'setting',
       playText: '正在连接',
       toolContIsShow: false,
@@ -62,13 +80,22 @@ export default class Live extends Component<{}> {
 
     this.configureBottom = new Animated.Value(0);
     this.btToolStyle = new Animated.Value(0);
-    this.audioToolStyle = new Animated.Value(0);
   }
 
   componentWillMount() {
     this.keyboardDidShowListener = Keyboard.addListener('keyboardWillShow', this.keyboardDidShow);
     this.keyboardDidHideListener = Keyboard.addListener('keyboardWillHide', this.keyboardDidHide);
     // 请求获取liveId
+    const { username, accessToken } = this.props.userState;
+    fetchLivePrepare({
+      username,
+      accessToken,
+    }).then(res => res.json())
+      .then((data) => {
+        if (data.code === 0) {
+          this.liveId = data.liveId;
+        }
+      });
   }
 
   componentDidMount() {
@@ -84,7 +111,7 @@ export default class Live extends Component<{}> {
     const { duration, endCoordinates } = event;
     Animated.timing(this.configureBottom, {
       duration,
-      toValue: endCoordinates.height,
+      toValue: -endCoordinates.height,
     }).start();
   }
 
@@ -102,37 +129,70 @@ export default class Live extends Component<{}> {
     }
   }
 
-  handlePlay = () => {
-    StreamerMethod.startCameraPreview();
+  socketHelper = (roomId) => {
+    const { push } = this.props.messageState;
+    const { username: un, avatarImg: ai, accessToken: at } = this.props.userState;
+
+    this.ws = new WebSocket(`${BACK_END_SOCKET_SERVER_URL}/${roomId}/${un}/${ai}/${at}`); // eslint-disable-line
+
+    this.ws.onmessage = (data) => {
+      const message = JSON.parse(data);
+      const {
+        type, msg, username, avatarImg, currentNumber,
+      } = message;
+
+      switch (type) {
+        case 'msg':
+          push({ msg, username, avatarImg });
+          break;
+        case 'come':
+          this.props.messageState.number = currentNumber;
+          push({ type, username });
+          break;
+        case 'leave':
+          this.props.messageState.number = currentNumber;
+          push({ type, username });
+          break;
+        default:
+      }
+    };
+
+    this.ws.onopen = () => {
+      console.log('建立[WebSocket]连接');
+    };
+
+    this.ws.onclose = () => {
+      console.log('断开[WebSocket]连接');
+    };
   }
 
-  handleUploadImg = () => {
-    const options = {
-      title: '上传封面',
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
-      cancelButtonTitle: '取消',
-      takePhotoButtonTitle: '拍照',
-      chooseFromLibraryButtonTitle: '从相册选取',
-      maxWidth: calculatePixel(340),
-      maxHeight: calculatePixel(450),
-      quality: 0.8,
-    };
-    ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response = ', response);
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        const source = { uri: response.uri };
-        this.setState({ coverSource: source });
-      }
-    });
+  handlePlay = (body) => {
+    const { username, accessToken } = this.props.userState;
+    body.append('username', username);
+    body.append('accessToken', accessToken);
+
+    fetchLivePlay(body)
+      .then(res => res.json())
+      .then((data) => {
+        if (data.code === 0) {
+          this.socketHelper(data.roomId);
+          StreamerMethod.startStream();
+
+          Animated.timing(this.configureBottom, {
+            duration: 250,
+            toValue: 500,
+          }).start(() => {
+            this.setState({
+              liveStatus: 'living',
+            });
+          });
+        } else {
+          Alert.alert(data.msg);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   handleResetBeautify = () => {
@@ -275,19 +335,18 @@ export default class Live extends Component<{}> {
     );
   }
 
-  renderMask = () => {
-    return (
-      <ScrollView
-        style={styles.mask}
-        onScroll={() => {
+  renderMask = () => (
+    <ScrollView
+      style={styles.mask}
+      keyboardDismissMode="on-drag"
+      onScroll={() => {
           const { toolContIsShow } = this.state;
           if (toolContIsShow) {
             this.hideToolContainer();
           }
         }}
-      />
-    );
-  }
+    />
+  )
 
   renderBeautifyTool = () => {
     const {
@@ -401,78 +460,17 @@ export default class Live extends Component<{}> {
     </View>
   )
 
-  renderConfigure = () => {
-    const { coverSource, playText } = this.state;
-    return (
-      <Animated.View style={[styles.configureCont, { bottom: this.configureBottom }]}>
-        <View style={styles.configure}>
-          <View style={styles.previewCont}>
-            {coverSource ?
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={this.handleUploadImg}
-              >
-                <Image
-                  style={styles.previewBtn}
-                  source={coverSource}
-                  resizeMode="cover"
-                />
-                <View style={[styles.tip, styles.tipWithBg]}>
-                  <Text style={styles.tipText}>更换封面</Text>
-                </View>
-              </TouchableOpacity> :
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={this.handleUploadImg}
-              >
-                <View style={styles.uploadCont}>
-                  <Text style={styles.cross}>+</Text>
-                  <View style={[styles.tip, styles.textCont]}>
-                    <Text style={styles.uploadText}>上传封面</Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
-            }
-          </View>
-          <TextInput
-            ref={(txtIn) => { this.txtIn = txtIn; }}
-            placeholder="听说好看的人都来直播了，你还在等什么？"
-            keyboardAppearance="dark"
-            selectionColor="rgba(230,29,114,.6)"
-            multiline={true}
-            style={styles.description}
-            placeholderTextColor="#888"
-            onChangeText={text => this.setState({ description: text })}
-          />
-        </View>
-        <View style={styles.control}>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={this.handlePlay}
-          >
-            <LinearGradient
-              colors={['#B11472', '#D01670', '#E61D72', '#E73151', '#E86224', '#F5D423']}
-              locations={[0, 0.2, 0.3515, 0.5455, 0.7525, 1]}
-              start={{ x: 0, y: 0.5 }}
-              end={{ x: 1, y: 0.5 }}
-              style={styles.playBtn}
-            >
-              <Text style={styles.playText}>{playText}</Text>
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>
-      </Animated.View>
-    );
-  }
-
   render() {
-    const { toolContIsShow } = this.state;
+    const { toolContIsShow, liveStatus, playText } = this.state;
+    const configAnimateStyle = {
+      transform: [{ translateY: this.configureBottom }],
+    };
 
     return (
       <View style={styles.container}>
         <Streamer
           style={styles.live}
-          url={`${pushStreamUrl}stream`}
+          url={`${pushStreamUrl}/${this.liveId}`}
           onStreamerInfo={(info) => {
             console.log(info);
             if (info.type === 'init') {
@@ -484,7 +482,12 @@ export default class Live extends Component<{}> {
           }}
         />
         {this.renderMask()}
-        {this.renderConfigure()}
+        {liveStatus === 'setting' ?
+          <Animated.View style={[styles.configureWrapper, configAnimateStyle]}>
+            <Configure handlePlayBtnClick={this.handlePlay} playText={playText} />
+          </Animated.View> :
+          <Message />
+        }
         {this.renderToolBar()}
         {toolContIsShow ? this.renderToolContainer() : null}
       </View>

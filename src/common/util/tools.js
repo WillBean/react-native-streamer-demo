@@ -21,3 +21,11 @@ export function calculatePixel(pixel) {
   }
   return pixel;
 }
+
+export function formatQuery(query) {
+  let queryString = '?';
+  for (const key in query) {
+    queryString += `${key}=${query[key]}&`;
+  }
+  return queryString.replace(/&$/, '');
+}

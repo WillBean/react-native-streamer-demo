@@ -4123,6 +4123,10 @@ react-native-navigation@^1.1.370:
   dependencies:
     lodash "4.x.x"
 
+react-native-storage@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-storage/-/react-native-storage-0.2.2.tgz#4449197f122b2da0650e3704e1f050260ed58d9f"
+
 react-native-streamer@^0.1.8:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/react-native-streamer/-/react-native-streamer-0.1.8.tgz#ca32df7944a22a3a641871d73af6de2a314a3df4"

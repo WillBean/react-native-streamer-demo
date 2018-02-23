@@ -60,3 +60,5 @@ typings/
 node_modules/
 android/app/build/
 .idea/
+ios/
+android/build/
