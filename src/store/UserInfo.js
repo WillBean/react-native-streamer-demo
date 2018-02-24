@@ -41,7 +41,7 @@ class UserInfo {
           this.accessToken = accessToken;
 
           storage.save({
-            ket: 'userState',
+            key: 'userState',
             data: {
               username,
               accessToken,
@@ -93,7 +93,7 @@ class UserInfo {
           this.avatarImg = avatarImg;
 
           storage.save({
-            ket: 'userState',
+            key: 'userState',
             data: {
               username: this.username,
               accessToken: this.accessToken,
@@ -112,7 +112,7 @@ class UserInfo {
     });
   }
 
-  @action description = (description) => {
+  @action updateDesc = (description) => {
     return new Promise(async (resolve, reject) => {
       try {
         const res = await fetchUserUpdateDesc({
@@ -126,7 +126,7 @@ class UserInfo {
           this.avatarImg = avatarImg;
 
           storage.save({
-            ket: 'userState',
+            key: 'userState',
             data: {
               username: this.username,
               accessToken: this.accessToken,

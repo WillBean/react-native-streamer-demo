@@ -9,11 +9,11 @@ export default StyleSheet.create({
     height,
   },
   player: {
-    width,
-    height,
     position: 'absolute',
     left: 0,
     top: 0,
+    bottom: 0,
+    right: 0,
   },
   tabBar: {
     paddingTop: 20,
@@ -68,7 +68,7 @@ export default StyleSheet.create({
   },
   animateCont: {
     position: 'absolute',
-    width,
+    right: 0,
     left: 0,
     bottom: 0,
   },

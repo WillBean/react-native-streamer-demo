@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Text,
   Keyboard,
   Animated,
   ScrollView,
@@ -20,8 +21,9 @@ import {
   pushStreamUrl,
   BACK_END_SOCKET_SERVER_URL,
 } from '../../common/config';
+import style from '../../component/RoomInfo/style';
 
-@inject('userState', 'messageState')
+@inject('userState')
 @observer
 export default class Live extends Component<{}> {
   static propTypes = {
@@ -31,16 +33,11 @@ export default class Live extends Component<{}> {
       avatarImg: PropTypes.string,
       accessToken: PropTypes.string,
     }),
-    messageState: PropTypes.shape({
-      number: PropTypes.number,
-      push: PropTypes.func,
-    }),
   };
 
   static defaultProps = {
     navigator: {},
     userState: {},
-    messageState: {},
   }
 
   constructor(props) {
@@ -53,6 +50,7 @@ export default class Live extends Component<{}> {
       enableBeautify: true,
       audioToolIsShow: false,
       hideToolCont: false,
+      message: [],
     };
 
     this.configureBottom = new Animated.Value(0);
@@ -133,8 +131,20 @@ export default class Live extends Component<{}> {
     }
   }
 
+  pushMessage = (chat, withNum) => {
+    const { message } = this.state;
+    if (message.length > 20) {
+      const list = this.chatList.slice(1, message.length);
+      list.push(chat);
+      if (!withNum) {
+        this.setState({ message: list });
+      } else {
+        this.setState({ message: list, number: withNum });
+      }
+    }
+  }
+
   socketHelper = (roomId) => {
-    const { push } = this.props.messageState;
     const { username: un, avatarImg: ai, accessToken: at } = this.props.userState;
 
     this.ws = new WebSocket(`${BACK_END_SOCKET_SERVER_URL}/${roomId}/${un}/${ai}/${at}`); // eslint-disable-line
@@ -147,15 +157,13 @@ export default class Live extends Component<{}> {
 
       switch (type) {
         case 'msg':
-          push({ msg, username, avatarImg });
+          this.pushMessage({ msg, username, avatarImg });
           break;
         case 'come':
-          this.props.messageState.number = currentNumber;
-          push({ type, username });
+          this.pushMessage({ type, username }, currentNumber);
           break;
         case 'leave':
-          this.props.messageState.number = currentNumber;
-          push({ type, username });
+          this.pushMessage({ type, username }, currentNumber);
           break;
         default:
       }
@@ -171,24 +179,34 @@ export default class Live extends Component<{}> {
   }
 
   handleClose = () => {
+    const { liveStatus } = this.state;
     const { navigator, userState } = this.props;
     const { username, accessToken } = userState;
 
     navigator.dismissModal({
       screen: 'Configure',
     });
-    this.ws.close();
-    fetchLiveStop({
-      username,
-      accessToken,
-      liveId: this.liveId,
-    })
-      .then(res => res.json())
-      .then((data) => {
-        if (data.code === 0) {
-          __DEV__ && console.log('退出直播'); // eslint-disable-line
-        }
-      });
+
+    if (liveStatus === 'living') {
+      const close = () => {
+        this.ws.close();
+        fetchLiveStop({
+          username,
+          accessToken,
+          liveId: this.liveId,
+        })
+          .then(res => res.json())
+          .then((data) => {
+            if (data.code === 0) {
+              __DEV__ && console.log('退出直播'); // eslint-disable-line
+            }
+          });
+      };
+      Alert.alert('结束直播', '您确定要结束直播吗？', [
+        { text: '取消', onPress: () => {} },
+        { text: '确定', onPress: close },
+      ], { cancelable: false });
+    }
   }
 
   handlePlay = (body) => {
@@ -227,22 +245,35 @@ export default class Live extends Component<{}> {
     });
   }
 
-  renderMask = () => (
-    <ScrollView
-      style={styles.mask}
-      keyboardDismissMode="on-drag"
-      onScroll={() => {
+  renderMask = () => {
+    const { liveStatus } = this.state;
+    const bg = liveStatus === 'setting' ? { backgroundColor: 'rgba(0, 0, 0, .4)' } : null;
+    return (
+      <ScrollView
+        style={[styles.mask, bg]}
+        keyboardDismissMode="on-drag"
+        onScroll={() => {
           const { toolContIsShow } = this.state;
           if (toolContIsShow) {
             this.hideToolContainer();
           }
         }}
-    />
-  )
+      />
+    );
+  }
+
+  renderNumber = () => {
+    const { number } = this.state;
+    return (
+      <View style={styles.numberCont}>
+        <Text style={style.infoText}><Text style={style.number}>{number}</Text>人正在观看直播</Text>
+      </View>
+    );
+  }
 
   render() {
     const {
-      toolContIsShow, liveStatus, playText, beautifyToolIsShow, audioToolIsShow, enableBeautify, hideToolCont,
+      toolContIsShow, liveStatus, playText, beautifyToolIsShow, audioToolIsShow, enableBeautify, hideToolCont, message,
     } = this.state;
     const configAnimateStyle = {
       transform: [{ translateY: this.configureBottom }],
@@ -265,11 +296,12 @@ export default class Live extends Component<{}> {
           }}
         />
         {this.renderMask()}
+        {liveStatus === 'living' ? this.renderNumber() : null}
         {liveStatus === 'setting' ?
           <Animated.View style={[styles.configureWrapper, configAnimateStyle]}>
             <Configure handlePlayBtnClick={this.handlePlay} playText={playText} />
           </Animated.View> :
-          <Message />
+          <Message message={message} />
         }
         <ToolBar
           navigator={navigator}

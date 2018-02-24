@@ -26,15 +26,13 @@ export default StyleSheet.create({
   },
   msgItemOuter: {
     backgroundColor: 'rgba(255, 255, 255, 0.4)',
-    minHeight: calculatePixel(30),
+    paddingVertical: calculatePixel(3),
     borderRadius: calculatePixel(15),
     flexDirection: 'row',
     justifyContent: 'center',
-    // alignItems: 'center',
     paddingLeft: calculatePixel(5),
     paddingRight: calculatePixel(15),
     marginVertical: calculatePixel(5),
-    // position: 'absolute',
   },
   avatar: {
     width: calculatePixel(24),
@@ -50,6 +48,10 @@ export default StyleSheet.create({
     paddingTop: calculatePixel(3),
     fontSize: calculatePixel(8),
     color: '#454545',
+  },
+  systemText: {
+    color: '#333',
+    fontSize: calculatePixel(8),
   },
   msgText: {
     color: '#333',

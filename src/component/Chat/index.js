@@ -3,13 +3,17 @@ import {
   Image,
   View,
   TextInput,
-  Keyboard,
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 import style from './style';
 import chatImg from '../../images/chat.png';
 
-export default class Account extends Component<{}> {
+export default class Chat extends Component<{}> {
+  static propTypes = {
+    onMessageSend: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -17,15 +21,9 @@ export default class Account extends Component<{}> {
     };
   }
 
-  componentWillMount() {}
-
-  componentWillUnmount() {
-
-  }
-
   render() {
     const { inputText } = this.state;
-
+    const { onMessageSend } = this.props;
 
     return (
       <View style={style.container}>
@@ -45,6 +43,7 @@ export default class Account extends Component<{}> {
           onChangeText={text => this.setState({ inputText: text })}
           onSubmitEditing={() => {
             // send the message
+            onMessageSend(inputText);
             this.setState({
               inputText: '',
             });

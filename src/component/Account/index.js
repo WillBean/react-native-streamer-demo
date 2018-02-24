@@ -8,17 +8,39 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import ImagePicker from 'react-native-image-picker';
+import { observer, inject } from 'mobx-react';
+import PropTypes from 'prop-types';
 
 import style from './style';
 import { calculatePixel } from '../../common/util/tools';
-import { fetchUserUploadAvatar } from '../../common/api/users';
+import defaultAvatarImg from '../../images/img.png';
 
+@inject('userState')
+@observer
 export default class Account extends Component<{}> {
+  static propTypes = {
+    userState: PropTypes.shape({
+      username: PropTypes.string,
+      avatarImg: PropTypes.string,
+      description: PropTypes.string,
+      avatar: PropTypes.func,
+      fetch: PropTypes.func,
+    }),
+  };
+
+  static defaultProps = {
+    userState: {},
+  }
+
   constructor(props) {
     super(props);
     this.state = {
       avatarSource: null,
     };
+  }
+
+  componentWillMount() {
+    this.props.userState.fetch();
   }
 
   handleSelectPhoto() {
@@ -55,24 +77,14 @@ export default class Account extends Component<{}> {
         const body = new FormData(); // eslint-disable-line
         body.append('imageData', d);
         body.append('filename', fileName);
-        fetchUserUploadAvatar(body)
-          .then(res => res.json())
-          .then((data) => {
-            if (data.code === 0) {
-              console.log(data);
-            } else {
-              Alert.alert(data.msg);
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        this.props.userState.avatar(body);
       }
     });
   }
 
   render() {
-    const { data } = this.props;
+    const { username, description, avatarImg } = this.props.userState;
+    const imgSource = avatarImg ? {uri: avatarImg} : defaultAvatarImg;
 
     return (
       <View style={style.page}>
@@ -88,12 +100,12 @@ export default class Account extends Component<{}> {
             onPress={this.handleSelectPhoto.bind(this)}
           >
             <Image
-              source={this.state.avatarSource}
+              source={imgSource}
               style={style.avatar}
             />
           </TouchableHighlight>
-          <Text style={style.name}>GAKKI</Text>
-          <Text style={style.description}>hdowfenoaifoeiafoahohohaeofdhwia</Text>
+          <Text style={style.name}>{username}</Text>
+          <Text style={style.description}>{description || null}</Text>
         </LinearGradient>
       </View>
     );

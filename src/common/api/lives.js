@@ -28,3 +28,9 @@ export function fetchLiveStop(body) {
     body: JSON.stringify(body),
   });
 }
+
+export function fetchLiveStatus(query) {
+  return fetchAsync(`/lives/stop${formatQuery(query)}`, {
+    method: 'GET',
+  });
+}

@@ -23,12 +23,24 @@ export default StyleSheet.create({
     top: 0,
     width,
     height,
-    // backgroundColor: 'rgba(0, 0, 0, .4)',
   },
   configureWrapper: {
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
+  },
+
+  numberCont: {
+    position: 'absolute',
+    top: calculatePixel(17.5),
+    left: calculatePixel(15),
+  },
+  infoText: {
+    color: '#fff',
+    fontSize: calculatePixel(10),
+  },
+  number: {
+    color: 'rgba(230,29,114,1)',
   },
 });
