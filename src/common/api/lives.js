@@ -8,9 +8,10 @@ export function fetchLiveList(query) {
 }
 
 export function fetchLivePrepare(body) {
+  console.log(body);
   return fetchAsync('/lives/prepare', {
     method: 'POST',
-    body,
+    body: JSON.stringify(body),
   });
 }
 
@@ -18,5 +19,12 @@ export function fetchLivePlay(body) {
   return fetchAsync('/lives/play', {
     method: 'POST',
     body,
+  });
+}
+
+export function fetchLiveStop(body) {
+  return fetchAsync('/lives/stop', {
+    method: 'POST',
+    body: JSON.stringify(body),
   });
 }

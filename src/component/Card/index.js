@@ -8,29 +8,24 @@ import {
 import PropTypes from 'prop-types';
 
 import style from './style';
-import img from '../../images/img.png';
 
 function formatNumber(num) {
   if (num > 10000) {
     return `${(num / 10000).toFixed(1)}万人`;
   }
-  return num;
+  return `${num}人`;
 }
 
 export default class Card extends Component<{}> {
-  // static propsType = {
-  //   card: PropTypes.object.isRequired,
-  // }
+  static propTypes = {
+    card: PropTypes.object.isRequired,
+  }
 
   render() {
-    // const { card } = this.props;
-    const card = {
-      img: '',
-      liveId: '',
-      title: 'GAKKI',
-      description: '啊哈哈哈哈',
-      number: 12000,
-    };
+    const { card } = this.props;
+    const {
+      anchor, currentNumber, description, coverImage,
+    } = card;
     return (
       <TouchableHighlight
         style={style.cardContainer}
@@ -42,7 +37,7 @@ export default class Card extends Component<{}> {
           <Image
             style={style.cardImg}
             resizeMode="cover"
-            source={img}
+            source={{ uri: coverImage }}
           />
           <View style={style.living}>
             <View style={style.circle} />
@@ -50,11 +45,11 @@ export default class Card extends Component<{}> {
           </View>
           <View style={style.cardMsgCont}>
             <View style={style.cardRow}>
-              <Text style={style.title}>{card.title}</Text>
-              <Text style={style.number}>{formatNumber(card.number)}</Text>
+              <Text style={style.title}>{anchor}</Text>
+              <Text style={style.number}>{formatNumber(currentNumber)}</Text>
             </View>
             <View style={style.cardRow}>
-              <Text style={style.description}>{card.description}</Text>
+              <Text style={style.description}>{description}</Text>
             </View>
           </View>
         </View>

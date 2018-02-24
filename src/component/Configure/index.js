@@ -32,7 +32,7 @@ export default class Configure extends Component<{}> {
 
     const body = new FormData(); // eslint-disable-line
     body.append('imageData', this.imgData);
-    body.append('filename', this.fileName);
+    body.append('filename', this.filename);
     body.append('description', description);
     handlePlayBtnClick(body);
   }

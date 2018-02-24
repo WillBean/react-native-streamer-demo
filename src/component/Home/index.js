@@ -18,7 +18,7 @@ function formatCards(cards) {
   const len = Math.ceil(cards.length / 2);
   const newCards = [];
   for (let i = 0; i < len; i++) {
-    newCards.push([cards[i * 2], cards[(i * 2) + 1]]);
+    newCards.push([cards[i * 2], (i * 2) + 1 < cards.length ? cards[(i * 2) + 1] : null]);
   }
   return newCards;
 }
@@ -28,7 +28,7 @@ function formatCards(cards) {
 export default class Home extends Component<{}> {
   static propTypes = {
     liveState: PropTypes.shape({
-      list: PropTypes.array,
+      list: PropTypes.object,
       fetch: PropTypes.func,
     }),
   }
@@ -39,6 +39,9 @@ export default class Home extends Component<{}> {
 
   componentWillMount() {
     this.props.liveState.fetch();
+  }
+  componentWillUnmount() {
+    console.log(11111)
   }
 
   renderTabBar = () => {
@@ -115,7 +118,7 @@ export default class Home extends Component<{}> {
           <View key={Math.random()} style={style.listRow}>
             {row.map((card) => {
               if (card) {
-                return <Card key={card} card={card} />;
+                return <Card key={card.liveId} card={card} />;
               }
               return null;
             })}

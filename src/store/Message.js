@@ -4,7 +4,7 @@ class Message {
   @observable chatList = [];
   @observable number = 0;
 
-  @action push(chat) {
+  @action push = (chat) => {
     if (this.chatList.length > 20) {
       const list = this.chatList.slice(1, this.chatList.length);
       list.push(chat);

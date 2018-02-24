@@ -8,7 +8,7 @@ class Lives {
   @observable end = false;
   @observable list = [];
 
-  @action async fetch() {
+  @action fetch = async () => {
     const { start, step, active } = this;
     const res = await fetchLiveList({
       start,
@@ -16,9 +16,9 @@ class Lives {
       active,
     });
     const data = await res.json();
-    this.start += data.list.length;
+    this.start += data.lists.length;
     this.end = data.end;
-    this.list = this.list.concat(data.list);
+    this.list = this.list.concat(data.lists);
   }
 }
 

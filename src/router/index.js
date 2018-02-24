@@ -3,7 +3,6 @@ import { Navigation } from 'react-native-navigation';
 import Account from '../component/Account';
 import Home from '../container/Main';
 import Live from '../container/Live';
-import Configure from '../container/Configure';
 import Video from '../container/Video';
 
 export default function registerScreens(store: {}, Provider: {}) {

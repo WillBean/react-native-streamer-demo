@@ -3,12 +3,12 @@ import storage from '../common/storage';
 import { fecthUserLogin, fetchUserRegister, fetchUserUploadAvatar, fetchUserUpdateDesc } from '../common/api/users';
 
 class UserInfo {
-  @observable username;
+  @observable username = 'WillBean';
   @observable avatarImg;
   @observable description;
-  @observable accessToken;
+  @observable accessToken = '5a8d37df88730b6201553401';
 
-  @action async fetch() {
+  @action fetch = async () => {
     // 从storage获取
     try {
       const data = await storage.load({
@@ -27,7 +27,7 @@ class UserInfo {
     }
   }
 
-  @action login(username, password) {
+  @action login = (username, password) => {
     return new Promise(async (resolve, reject) => {
       try {
         const res = await fecthUserLogin({
@@ -60,7 +60,7 @@ class UserInfo {
     });
   }
 
-  @action register(username, password) {
+  @action register = (username, password) => {
     return new Promise(async (resolve, reject) => {
       try {
         const res = await fetchUserRegister({
@@ -81,7 +81,7 @@ class UserInfo {
     });
   }
 
-  @action avatar(body) {
+  @action avatar = (body) => {
     body.append('username', this.username);
     body.append('accessToken', this.accessToken);
     return new Promise(async (resolve, reject) => {
@@ -112,7 +112,7 @@ class UserInfo {
     });
   }
 
-  @action description(description) {
+  @action description = (description) => {
     return new Promise(async (resolve, reject) => {
       try {
         const res = await fetchUserUpdateDesc({

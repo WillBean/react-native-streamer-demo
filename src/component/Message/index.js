@@ -26,12 +26,7 @@ export default class Message extends Component<{}> {
     };
   }
 
-  componentWillMount() {
-    // this.ws = new WebSocket();
-  }
-
   componentDidMount() {
-    // this.ws = new WebSocket();
     setInterval(() => {
       const newData = this.state.data;
       newData.push(1);
