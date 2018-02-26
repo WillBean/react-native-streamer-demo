@@ -25,7 +25,8 @@ const streamerEmitter = new NativeEventEmitter(KSYPlayerModule);
 export default class Video extends Component<{}> {
   static propTypes = {
     navigator: PropTypes.object,
-    roomId: PropTypes.string.isRequired,
+    roomId: PropTypes.number.isRequired,
+    number: PropTypes.number.isRequired,
     anchor: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     liveId: PropTypes.string.isRequired,
@@ -42,11 +43,11 @@ export default class Video extends Component<{}> {
   }
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       message: [],
-      number: 0,
-    }
+      currentNumber: 0,
+    };
 
     this.chatBottom = new Animated.Value(0);
   }
@@ -71,6 +72,10 @@ export default class Video extends Component<{}> {
       console.log(e);
       if (e.type === 'inited') {
         KSYPlayerModule.prepareToPlay();
+      } else if (e.type === 'MPMoviePlayerPlaybackDidFinishNotification') {
+        Alert.alert('出错啦', '抱歉，直播间好像出了点问题 T_T', [
+          { text: '确定', onPress: () => { /* navigator.pop(); */ } },
+        ]);
       }
     });
   }
@@ -87,14 +92,20 @@ export default class Video extends Component<{}> {
 
   pushMessage = (chat, withNum) => {
     const { message } = this.state;
-    if (message.length > 20) {
-      const list = this.chatList.slice(1, message.length);
+    if (message.length >= 20) {
+      const list = message.slice(1, message.length);
       list.push(chat);
       if (!withNum) {
         this.setState({ message: list });
       } else {
-        this.setState({ message: list, number: withNum });
+        this.setState({ message: list, currentNumber: withNum });
       }
+    } else if (!withNum) {
+      message.push(chat);
+      this.setState({ message });
+    } else {
+      message.push(chat);
+      this.setState({ message, currentNumber: withNum });
     }
   }
 
@@ -124,30 +135,37 @@ export default class Video extends Component<{}> {
     }));
   }
 
+  handleClose = () => {
+    this.props.navigator.pop();
+    this.ws.close();
+  }
+
   socketHelper = (roomId) => {
-    const { username: un, avatarImg: ai, accessToken: at } = this.props.userState;
+    const { username: un, accessToken: at } = this.props.userState;
+    this.ws = new WebSocket(`${BACK_END_SOCKET_SERVER_URL}/${roomId}/${un}/${at}`); // eslint-disable-line
 
-    this.ws = new WebSocket(`${BACK_END_SOCKET_SERVER_URL}/${roomId}/${un}/${ai}/${at}`); // eslint-disable-line
-
-    this.ws.onmessage = (data) => {
-      const message = JSON.parse(data);
+    this.ws.onmessage = (socket) => {
+      const message = JSON.parse(socket.data);
       const {
-        type, msg, username, avatarImg, currentNumber,
+        type, msg, username, avatarImg, currentNumber, msgId,
       } = message;
 
       switch (type) {
         case 'msg':
-          this.pushMessage({ msg, username, avatarImg });
+          this.pushMessage({
+            type, msg, username, avatarImg, msgId,
+          });
           break;
         case 'come':
-          this.pushMessage({ type, username }, currentNumber);
+          this.pushMessage({ type, username, msgId }, currentNumber);
           break;
         case 'leave':
-          this.pushMessage({ type, username }, currentNumber);
+          this.pushMessage({ type, username, msgId }, currentNumber);
           break;
         case 'stop':
-          Alert.alert('直播已经结束啦！去看看别的吧~');
-          this.props.navigator.pop();
+          Alert.alert('提示', '直播已经结束啦！去看看别的吧~', [
+            { text: '确定', onPress: () => { this.props.navigator.pop(); } },
+          ]);
           break;
         default:
       }
@@ -164,9 +182,9 @@ export default class Video extends Component<{}> {
 
   render() {
     const {
-      anchor, description, liveId,
+      anchor, description, liveId, number,
     } = this.props;
-    const { number, message } = this.state;
+    const { currentNumber, message } = this.state;
     const animateStyle = {
       transform: [{ translateY: this.chatBottom }],
     };
@@ -176,12 +194,13 @@ export default class Video extends Component<{}> {
         <Player style={style.player} url={`${pushStreamUrl}/${liveId}`} />
         <Animated.View style={[style.animateCont, animateStyle]}>
           <Chat onMessageSend={this.handleMessageSend} />
-          <Message contStyle={style.msgBottom} messages={message} />
+          <Message contStyle={style.msgBottom} message={message} />
         </Animated.View>
         <RoomInfo
           anchor={anchor}
           description={description}
-          number={number}
+          number={currentNumber || number}
+          handleClose={this.handleClose}
         />
       </View>
     );

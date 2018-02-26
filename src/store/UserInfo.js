@@ -3,10 +3,10 @@ import storage from '../common/storage';
 import { fecthUserLogin, fetchUserRegister, fetchUserUploadAvatar, fetchUserUpdateDesc } from '../common/api/users';
 
 class UserInfo {
-  @observable username = 'WillBean';
+  @observable username;
   @observable avatarImg;
-  @observable description;
-  @observable accessToken = '5a8d37df88730b6201553401';
+  @observable description = '';
+  @observable accessToken;
 
   @action fetch = async () => {
     // 从storage获取
@@ -23,63 +23,59 @@ class UserInfo {
       this.avatarImg = avatarImg;
       this.description = description;
     } catch (err) {
-      console.log(`获取用户信息失败: ${err}`);
+      console.log(`获取用户信息失败: ${JSON.stringify(err)}`);
     }
   }
 
-  @action login = (username, password) => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const res = await fecthUserLogin({
-          username,
-          password,
-        });
-        const data = await res.json();
-        const { code, accessToken } = data;
-        if (code === 0) {
-          this.username = username;
-          this.accessToken = accessToken;
+  @action login = (username, password) => new Promise(async (resolve, reject) => {
+    try {
+      const res = await fecthUserLogin({
+        username,
+        password,
+      });
+      const data = await res.json();
+      const { code, accessToken } = data;
+      if (code === 0) {
+        this.username = username;
+        this.accessToken = accessToken;
 
-          storage.save({
-            key: 'userState',
-            data: {
-              username,
-              accessToken,
-              description: this.description,
-              avatarImg: this.avatarImg,
-            },
-          });
-          resolve(data);
-        } else {
-          reject(data);
-        }
-      } catch (err) {
-        console.log(`存储用户信息失败: ${err}`);
-        reject(err);
-      }
-    });
-  }
-
-  @action register = (username, password) => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const res = await fetchUserRegister({
-          username,
-          password,
+        storage.save({
+          key: 'userState',
+          data: {
+            username,
+            accessToken,
+            description: this.description,
+            avatarImg: this.avatarImg,
+          },
         });
-        const data = await res.json();
-        const { code } = data;
-        if (code === 0) {
-          this.username = username;
-          resolve(data);
-        } else {
-          reject(data);
-        }
-      } catch (err) {
-        reject(err);
+        resolve(data);
+      } else {
+        reject(data);
       }
-    });
-  }
+    } catch (err) {
+      console.log(`存储用户信息失败: ${JSON.stringify(err)}`);
+      reject(err);
+    }
+  })
+
+  @action register = (username, password) => new Promise(async (resolve, reject) => {
+    try {
+      const res = await fetchUserRegister({
+        username,
+        password,
+      });
+      const data = await res.json();
+      const { code } = data;
+      if (code === 0) {
+        this.username = username;
+        resolve(data);
+      } else {
+        reject(data);
+      }
+    } catch (err) {
+      reject(err);
+    }
+  })
 
   @action avatar = (body) => {
     body.append('username', this.username);
@@ -106,43 +102,45 @@ class UserInfo {
           reject(data);
         }
       } catch (err) {
-        console.log(`存储用户头像失败: ${err}`);
+        console.log(`存储用户头像失败: ${JSON.stringify(err)}`);
         reject(err);
       }
     });
   }
 
-  @action updateDesc = (description) => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const res = await fetchUserUpdateDesc({
-          description,
-          username: this.username,
-          accessToken: this.accessToken,
-        });
-        const data = await res.json();
-        const { code, avatarImg } = data;
-        if (code === 0) {
-          this.avatarImg = avatarImg;
+  @action updateDesc = description => new Promise(async (resolve, reject) => {
+    try {
+      const res = await fetchUserUpdateDesc({
+        description,
+        username: this.username,
+        accessToken: this.accessToken,
+      });
+      const data = await res.json();
+      const { code, avatarImg } = data;
+      if (code === 0) {
+        this.avatarImg = avatarImg;
 
-          storage.save({
-            key: 'userState',
-            data: {
-              username: this.username,
-              accessToken: this.accessToken,
-              description,
-              avatarImg: this.avatarImg,
-            },
-          });
-          resolve(data);
-        } else {
-          reject(data);
-        }
-      } catch (err) {
-        console.log(`存储用户描述失败: ${err}`);
-        reject(err);
+        storage.save({
+          key: 'userState',
+          data: {
+            username: this.username,
+            accessToken: this.accessToken,
+            description,
+            avatarImg: this.avatarImg,
+          },
+        });
+        resolve(data);
+      } else {
+        reject(data);
       }
-    });
+    } catch (err) {
+      console.log(`存储用户描述失败: ${JSON.stringify(err)}`);
+      reject(err);
+    }
+  })
+
+  @action setUsername = (val) => {
+    this.username = val;
   }
 }
 

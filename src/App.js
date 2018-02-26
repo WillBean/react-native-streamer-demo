@@ -6,7 +6,7 @@ import store from './store';
 registerScreens(store, Provider);
 Navigation.startSingleScreenApp({
   screen: {
-    screen: 'Home',
+    screen: 'Main',
     navigatorStyle: {
       navBarHidden: true,
     },

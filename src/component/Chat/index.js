@@ -34,6 +34,7 @@ export default class Chat extends Component<{}> {
         />
         <TextInput
           style={style.chatInput}
+          returnKeyType="send"
           placeholder="对主播说点什么呗？"
           keyboardAppearance="dark"
           selectionColor="rgba(230,29,114,.6)"

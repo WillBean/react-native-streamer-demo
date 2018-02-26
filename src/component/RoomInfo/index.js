@@ -15,6 +15,7 @@ export default class Account extends Component<{}> {
   static propTypes = {
     number: PropTypes.number.isRequired,
     anchor: PropTypes.string.isRequired,
+    handleClose: PropTypes.func.isRequired,
     description: PropTypes.string.isRequired,
   };
 
@@ -36,14 +37,14 @@ export default class Account extends Component<{}> {
   }
 
   render() {
-    const { number } = this.props;
+    const { number, handleClose } = this.props;
     return (
       <View style={style.container}>
         {this.renderAnchor()}
         <View style={style.infoCont}>
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={() => {}}
+            onPress={handleClose}
           >
             <Image
               source={closeImg}

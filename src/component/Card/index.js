@@ -3,7 +3,7 @@ import {
   View,
   Text,
   Image,
-  TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -19,41 +19,53 @@ function formatNumber(num) {
 export default class Card extends Component<{}> {
   static propTypes = {
     card: PropTypes.object.isRequired,
+    navigator: PropTypes.object.isRequired,
   }
 
   render() {
-    const { card } = this.props;
+    const { card, navigator } = this.props;
     const {
-      anchor, currentNumber, description, coverImage,
+      anchor, currentNumber, description, coverImage, roomId, liveId,
     } = card;
     return (
-      <TouchableHighlight
+      <TouchableOpacity
         style={style.cardContainer}
+        activeOpacity={0.8}
         onPress={() => {
-          console.log(111222);
+          navigator.push({
+            screen: 'Video',
+            navigatorStyle: {
+              navBarHidden: true,
+            },
+            passProps: {
+              roomId,
+              anchor,
+              description,
+              liveId,
+              number: currentNumber,
+            },
+          });
         }}
       >
-        <View>
-          <Image
-            style={style.cardImg}
-            resizeMode="cover"
-            source={{ uri: coverImage }}
-          />
-          <View style={style.living}>
-            <View style={style.circle} />
-            <Text style={style.livingText}>直播中</Text>
+        <Image
+          style={style.cardImg}
+          resizeMode="cover"
+          source={{ uri: coverImage }}
+        />
+        <View style={style.living}>
+          <View style={style.circle} />
+          <Text style={style.livingText}>直播中</Text>
+        </View>
+        <View style={style.cardMsgCont}>
+          <View style={style.cardRow}>
+            <Text style={style.title}>{anchor}</Text>
+            <Text style={style.number}>{formatNumber(currentNumber)}</Text>
           </View>
-          <View style={style.cardMsgCont}>
-            <View style={style.cardRow}>
-              <Text style={style.title}>{anchor}</Text>
-              <Text style={style.number}>{formatNumber(currentNumber)}</Text>
-            </View>
-            <View style={style.cardRow}>
-              <Text style={style.description}>{description}</Text>
-            </View>
+          <View style={style.cardRow}>
+            <Text style={style.description}>{description}</Text>
           </View>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     );
   }
 }

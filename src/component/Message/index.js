@@ -58,8 +58,8 @@ function renderMsgItem(data) {
 
 export default class Message extends Component<{}> {
   static propTypes = {
-    contStyle: PropTypes.object,
-    message: PropTypes.string.isRequired,
+    contStyle: PropTypes.number,
+    message: PropTypes.array.isRequired,
   }
 
   static defaultProps = {
@@ -79,7 +79,7 @@ export default class Message extends Component<{}> {
           }}
         >
           <View style={style.placeholder} />
-          {message.map(msg => renderMsgItem(msg))}
+          {message.length ? message.map(msg => renderMsgItem(msg)) : null}
         </ScrollView>
       </View>
     );

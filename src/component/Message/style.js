@@ -39,7 +39,6 @@ export default StyleSheet.create({
     height: calculatePixel(24),
     borderRadius: calculatePixel(12),
     marginRight: calculatePixel(5),
-    marginTop: calculatePixel(3),
   },
   msgBox: {
     maxWidth: calculatePixel(290),

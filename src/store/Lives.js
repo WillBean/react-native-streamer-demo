@@ -8,7 +8,7 @@ class Lives {
   @observable end = false;
   @observable list = [];
 
-  @action fetch = async () => {
+  @action fetch = () => new Promise(async (resolve) => {
     const { start, step, active } = this;
     const res = await fetchLiveList({
       start,
@@ -19,7 +19,20 @@ class Lives {
     this.start += data.lists.length;
     this.end = data.end;
     this.list = this.list.concat(data.lists);
-  }
+    resolve();
+  })
+
+  @action refresh = () => new Promise(async (resolve) => {
+    const { list, step, active } = this;
+    const res = await fetchLiveList({
+      start: 0,
+      step: list.length + step,
+      active,
+    });
+    const data = await res.json();
+    this.list = data.lists;
+    resolve();
+  })
 }
 
 export default new Lives();

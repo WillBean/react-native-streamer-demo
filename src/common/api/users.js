@@ -12,21 +12,21 @@ export function fetchUserUploadAvatar(body) {
 
 export function fetchUserUpdateDesc(body) {
   return fetchAsync('/users/updateDesc', {
-    body,
+    body: JSON.stringify(body),
     method: 'POST',
   });
 }
 
 export function fetchUserRegister(body) {
   return fetchAsync('/users/register', {
-    body,
+    body: JSON.stringify(body),
     method: 'POST',
   });
 }
 
 export function fecthUserLogin(body) {
   return fetchAsync('/users/login', {
-    body,
+    body: JSON.stringify(body),
     method: 'POST',
   });
 }

@@ -25,15 +25,6 @@ export default class Main extends Component<{}> {
     };
   }
 
-  componentDidMount() {
-    // this.props.navigator.showModal({
-    //   screen: 'Live',
-    //   navigatorStyle: {
-    //     navBarHidden: true,
-    //   },
-    // });
-  }
-
   handleNavClick(type) {
     if (type === 'Home' || type === 'Account') {
       this.setState({ activeNav: type });
@@ -57,7 +48,7 @@ export default class Main extends Component<{}> {
     return (
       <View style={style.wrapper}>
         <View style={[style.pageCont, transformCls]}>
-          <Home />
+          <Home navigator={navigator} />
           <Account />
         </View>
         <Nav

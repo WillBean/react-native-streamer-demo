@@ -51,6 +51,7 @@ export default class Live extends Component<{}> {
       audioToolIsShow: false,
       hideToolCont: false,
       message: [],
+      number: 0,
     };
 
     this.configureBottom = new Animated.Value(0);
@@ -69,7 +70,6 @@ export default class Live extends Component<{}> {
       .then((data) => {
         if (data.code === 0) {
           this.liveId = data.liveId;
-          console.log(data.liveId);
         }
       })
       .catch((err) => {
@@ -133,14 +133,20 @@ export default class Live extends Component<{}> {
 
   pushMessage = (chat, withNum) => {
     const { message } = this.state;
-    if (message.length > 20) {
-      const list = this.chatList.slice(1, message.length);
+    if (message.length >= 20) {
+      const list = message.slice(1, message.length);
       list.push(chat);
       if (!withNum) {
         this.setState({ message: list });
       } else {
         this.setState({ message: list, number: withNum });
       }
+    } else if (!withNum) {
+      message.push(chat);
+      this.setState({ message });
+    } else {
+      message.push(chat);
+      this.setState({ message, number: withNum });
     }
   }
 
@@ -152,18 +158,20 @@ export default class Live extends Component<{}> {
     this.ws.onmessage = (data) => {
       const message = JSON.parse(data);
       const {
-        type, msg, username, avatarImg, currentNumber,
+        type, msg, username, avatarImg, currentNumber, msgId,
       } = message;
 
       switch (type) {
         case 'msg':
-          this.pushMessage({ msg, username, avatarImg });
+          this.pushMessage({
+            type, msg, username, avatarImg, msgId,
+          });
           break;
         case 'come':
-          this.pushMessage({ type, username }, currentNumber);
+          this.pushMessage({ type, username, msgId }, currentNumber);
           break;
         case 'leave':
-          this.pushMessage({ type, username }, currentNumber);
+          this.pushMessage({ type, username, msgId }, currentNumber);
           break;
         default:
       }

@@ -3,8 +3,8 @@ import {
   View,
   Text,
   Image,
-  Alert,
-  TouchableHighlight,
+  TextInput,
+  TouchableOpacity,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import ImagePicker from 'react-native-image-picker';
@@ -14,6 +14,8 @@ import PropTypes from 'prop-types';
 import style from './style';
 import { calculatePixel } from '../../common/util/tools';
 import defaultAvatarImg from '../../images/img.png';
+import penImg from '../../images/pen.png';
+import rightImg from '../../images/right.png';
 
 @inject('userState')
 @observer
@@ -25,6 +27,7 @@ export default class Account extends Component<{}> {
       description: PropTypes.string,
       avatar: PropTypes.func,
       fetch: PropTypes.func,
+      updateDesc: PropTypes.func,
     }),
   };
 
@@ -35,7 +38,8 @@ export default class Account extends Component<{}> {
   constructor(props) {
     super(props);
     this.state = {
-      avatarSource: null,
+      desc: null,
+      descEnable: false,
     };
   }
 
@@ -53,8 +57,8 @@ export default class Account extends Component<{}> {
       cancelButtonTitle: '取消',
       takePhotoButtonTitle: '拍照',
       chooseFromLibraryButtonTitle: '从相册选取',
-      maxWidth: calculatePixel(360),
-      maxHeight: calculatePixel(360),
+      maxWidth: calculatePixel(240),
+      maxHeight: calculatePixel(240),
       quality: 0.95,
     };
     ImagePicker.showImagePicker(options, (response) => {
@@ -67,12 +71,7 @@ export default class Account extends Component<{}> {
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
       } else {
-        const { uri, data: d, fileName } = response;
-        const source = { uri };
-
-        this.setState({
-          avatarSource: source,
-        });
+        const { data: d, fileName } = response;
 
         const body = new FormData(); // eslint-disable-line
         body.append('imageData', d);
@@ -82,9 +81,24 @@ export default class Account extends Component<{}> {
     });
   }
 
+  handleEnableDesc = () => {
+    const { descEnable, desc } = this.state;
+    if (descEnable) {
+      this.setState({ descEnable: false });
+      desc && desc !== '' && this.props.userState.updateDesc(desc); // eslint-disable-line
+    }
+    if (!descEnable) {
+      this.setState({ descEnable: true }, () => {
+        this.descInput.focus();
+      });
+    }
+  }
+
   render() {
     const { username, description, avatarImg } = this.props.userState;
-    const imgSource = avatarImg ? {uri: avatarImg} : defaultAvatarImg;
+    const { desc, descEnable } = this.state;
+    const imgSource = avatarImg ? { uri: avatarImg } : defaultAvatarImg;
+    const enableImg = !descEnable ? penImg : rightImg;
 
     return (
       <View style={style.page}>
@@ -95,7 +109,8 @@ export default class Account extends Component<{}> {
           end={{ x: 1, y: 0.5 }}
           style={style.accountMsg}
         >
-          <TouchableHighlight
+          <TouchableOpacity
+            activeOpacity={0.8}
             style={style.avatarCont}
             onPress={this.handleSelectPhoto.bind(this)}
           >
@@ -103,9 +118,31 @@ export default class Account extends Component<{}> {
               source={imgSource}
               style={style.avatar}
             />
-          </TouchableHighlight>
+          </TouchableOpacity>
           <Text style={style.name}>{username}</Text>
-          <Text style={style.description}>{description || null}</Text>
+          <View style={style.descCont}>
+            <TextInput
+              ref={(dom) => { this.descInput = dom; }}
+              style={style.description}
+              multiline={true}
+              numberOfLines={3}
+              onChangeText={(des) => { this.setState({ desc: des }); }}
+              value={desc || description}
+              placeholder="写点什么吧，好让别人更了解你~"
+              placeholderTextColor="#dddddd"
+              editable={descEnable}
+            />
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={this.handleEnableDesc}
+            >
+              <Image
+                style={style.enable}
+                source={enableImg}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+          </View>
         </LinearGradient>
       </View>
     );

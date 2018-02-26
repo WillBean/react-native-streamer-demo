@@ -27,4 +27,30 @@ export default StyleSheet.create({
     height: calculatePixel(90),
     borderRadius: calculatePixel(40),
   },
+  name: {
+    color: '#fff',
+    fontSize: calculatePixel(16),
+    marginTop: calculatePixel(10),
+    marginBottom: calculatePixel(5),
+  },
+  descCont: {
+    position: 'relative',
+    width,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  description: {
+    fontSize: calculatePixel(14),
+    color: '#fff',
+    width: calculatePixel(250),
+    textAlignVertical: 'top',
+    textAlign: 'center',
+  },
+  enable: {
+    position: 'absolute',
+    top: -calculatePixel(5),
+    height: calculatePixel(20),
+    width: calculatePixel(20),
+  },
 });

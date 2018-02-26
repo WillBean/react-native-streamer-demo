@@ -30,7 +30,7 @@ export function fetchLiveStop(body) {
 }
 
 export function fetchLiveStatus(query) {
-  return fetchAsync(`/lives/stop${formatQuery(query)}`, {
+  return fetchAsync(`/lives/status${formatQuery(query)}`, {
     method: 'GET',
   });
 }

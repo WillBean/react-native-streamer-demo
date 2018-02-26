@@ -32,7 +32,7 @@ export default StyleSheet.create({
     fontSize: 16,
   },
   scrollCont: {
-    marginBottom: 120,
+    flex: 1,
   },
   // Banner
   swiperContainer: {
@@ -74,6 +74,6 @@ export default StyleSheet.create({
   },
   listRow: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
   },
 });

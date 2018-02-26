@@ -4,6 +4,7 @@ import {
   Text,
   Image,
   ScrollView,
+  RefreshControl,
   TouchableOpacity,
 } from 'react-native';
 import { observer, inject } from 'mobx-react';
@@ -27,9 +28,11 @@ function formatCards(cards) {
 @observer
 export default class Home extends Component<{}> {
   static propTypes = {
+    navigator: PropTypes.object.isRequired,
     liveState: PropTypes.shape({
       list: PropTypes.object,
       fetch: PropTypes.func,
+      refresh: PropTypes.func,
     }),
   }
 
@@ -37,11 +40,27 @@ export default class Home extends Component<{}> {
     liveState: {},
   }
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isRefreshing: false,
+    };
+  }
+
   componentWillMount() {
     this.props.liveState.fetch();
   }
   componentWillUnmount() {
-    console.log(11111)
+    console.log(11111);
+  }
+
+  onRefresh = () => {
+    const { refresh } = this.props.liveState;
+    this.setState({ isRefreshing: true });
+    refresh().then(() => {
+      this.setState({ isRefreshing: false });
+    });
   }
 
   renderTabBar = () => {
@@ -98,9 +117,6 @@ export default class Home extends Component<{}> {
               resizeMode="cover"
               style={style.bannerImg}
               source={{ uri: data.img }}
-              onLoad={() => {
-                console.log(111);
-              }}
             />
           ))}
         </Swiper>
@@ -109,7 +125,8 @@ export default class Home extends Component<{}> {
   }
 
   renderCardList() {
-    const { list } = this.props.liveState;
+    const { navigator, liveState } = this.props;
+    const { list } = liveState;
     const cards = formatCards(list);
 
     return (
@@ -118,7 +135,7 @@ export default class Home extends Component<{}> {
           <View key={Math.random()} style={style.listRow}>
             {row.map((card) => {
               if (card) {
-                return <Card key={card.liveId} card={card} />;
+                return <Card key={card.liveId} card={card} navigator={navigator} />;
               }
               return null;
             })}
@@ -133,7 +150,18 @@ export default class Home extends Component<{}> {
     return (
       <View style={style.page}>
         {this.renderTabBar()}
-        <ScrollView style={style.scrollCont}>
+        <ScrollView
+          style={style.scrollCont}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.isRefreshing}
+              onRefresh={this.onRefresh}
+              tintColor="#ff0000"
+              colors={['#ff0000', '#00ff00', '#0000ff']}
+              progressBackgroundColor="#ffff00"
+            />
+          }
+        >
           {this.renderViewPager()}
           {this.renderCardList()}
         </ScrollView>

@@ -1,15 +1,14 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
   wrapper: {
-    width,
-    height,
+    flex: 1,
   },
   pageCont: {
     flexDirection: 'row',
-    // transform: [{ translateX: -200 }],
+    flex: 1,
   },
   pageTwo: {
     transform: [{ translateX: -width }],
