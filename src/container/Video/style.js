@@ -63,13 +63,13 @@ export default StyleSheet.create({
     height: calculatePixel(66),
     borderRadius: calculatePixel(33),
   },
-  msgBottom: {
-    bottom: calculatePixel(60),
-  },
   animateCont: {
     position: 'absolute',
     right: 0,
     left: 0,
     bottom: 0,
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    justifyContent: 'center',
   },
 });

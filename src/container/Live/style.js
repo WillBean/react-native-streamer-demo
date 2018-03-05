@@ -6,8 +6,9 @@ const { width, height } = Dimensions.get('window');
 export default StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     backgroundColor: '#666',
   },
   live: {
@@ -23,6 +24,7 @@ export default StyleSheet.create({
     top: 0,
     width,
     height,
+    // flex: 1,
   },
   configureWrapper: {
     position: 'absolute',

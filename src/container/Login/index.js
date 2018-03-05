@@ -131,6 +131,7 @@ export default class Login extends Component<{}> {
               placeholder="手机/邮箱/用户名"
               placeholderTextColor="#fff"
               maxLength={24}
+              underlineColorAndroid="transparent"
               value={username}
               onChangeText={(val) => { setUsername(val); }}
               style={style.input}
@@ -148,6 +149,7 @@ export default class Login extends Component<{}> {
               placeholderTextColor="#fff"
               maxLength={24}
               value={password}
+              underlineColorAndroid="transparent"
               onChangeText={(val) => { this.setState({ password: val }); }}
               secureTextEntry={true}
               style={style.input}

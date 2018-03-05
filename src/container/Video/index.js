@@ -3,11 +3,12 @@ import {
   View,
   Alert,
   NativeModules,
-  requireNativeComponent,
-  NativeEventEmitter, Keyboard, Animated,
+  Keyboard,
+  Animated,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
+import { Player } from 'react-native-streamer';
 
 import style from './style';
 import Chat from '../../component/Chat';
@@ -16,9 +17,7 @@ import { BACK_END_SOCKET_SERVER_URL, pushStreamUrl } from '../../common/config';
 import { fetchLiveStatus } from '../../common/api/lives';
 import Message from '../../component/Message';
 
-const Player = requireNativeComponent('KSYPlayer', null);
 const { KSYPlayerModule } = NativeModules;
-const streamerEmitter = new NativeEventEmitter(KSYPlayerModule);
 
 @inject('userState')
 @observer
@@ -65,28 +64,15 @@ export default class Video extends Component<{}> {
 
     this.socketHelper(roomId);
 
-    this.keyboardDidShowListener = Keyboard.addListener('keyboardWillShow', this.keyboardDidShow);
-    this.keyboardDidHideListener = Keyboard.addListener('keyboardWillHide', this.keyboardDidHide);
-
-    this.subscription = streamerEmitter.addListener('onIOSPlayerInfo', (e) => {
-      console.log(e);
-      if (e.type === 'inited') {
-        KSYPlayerModule.prepareToPlay();
-      } else if (e.type === 'MPMoviePlayerPlaybackDidFinishNotification') {
-        Alert.alert('出错啦', '抱歉，直播间好像出了点问题 T_T', [
-          { text: '确定', onPress: () => { /* navigator.pop(); */ } },
-        ]);
-      }
-    });
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
   }
 
   componentWillUnmount() {
     this.keyboardDidShowListener.remove();
     this.keyboardDidHideListener.remove();
 
-    this.subscription.remove();
     KSYPlayerModule.stop();
-
     this.ws.close();
   }
 
@@ -112,15 +98,15 @@ export default class Video extends Component<{}> {
   keyboardDidShow = (event) => {
     const { duration, endCoordinates } = event;
     Animated.timing(this.chatBottom, {
-      duration,
+      duration: 0,
       toValue: -endCoordinates.height,
     }).start();
   }
 
   keyboardDidHide = (event) => {
-    const { duration } = event;
+    // const { duration } = event;
     Animated.timing(this.chatBottom, {
-      duration,
+      duration: 0,
       toValue: 0,
     }).start();
   }
@@ -136,13 +122,14 @@ export default class Video extends Component<{}> {
   }
 
   handleClose = () => {
+    KSYPlayerModule.stop();
+    this.ws && this.ws.close(); // eslint-disable-line
     this.props.navigator.pop();
-    this.ws.close();
   }
 
   socketHelper = (roomId) => {
-    const { username: un, accessToken: at } = this.props.userState;
-    this.ws = new WebSocket(`${BACK_END_SOCKET_SERVER_URL}/${roomId}/${un}/${at}`); // eslint-disable-line
+    const { username: un } = this.props.userState;
+    this.ws = new WebSocket(`${BACK_END_SOCKET_SERVER_URL}/${roomId}/${un}`); // eslint-disable-line
 
     this.ws.onmessage = (socket) => {
       const message = JSON.parse(socket.data);
@@ -164,6 +151,11 @@ export default class Video extends Component<{}> {
           break;
         case 'stop':
           Alert.alert('提示', '直播已经结束啦！去看看别的吧~', [
+            { text: '确定', onPress: () => { this.props.navigator.pop(); } },
+          ]);
+          break;
+        case 'error':
+          Alert.alert('出错啦', '抱歉，直播间好像出了点问题 T_T', [
             { text: '确定', onPress: () => { this.props.navigator.pop(); } },
           ]);
           break;
@@ -191,10 +183,16 @@ export default class Video extends Component<{}> {
 
     return (
       <View style={style.container}>
-        <Player style={style.player} url={`${pushStreamUrl}/${liveId}`} />
+        <Player
+          style={style.player}
+          url={`${pushStreamUrl}/${liveId}`}
+          onPlayerInfo={(e) => {
+            console.log(e);
+          }}
+        />
         <Animated.View style={[style.animateCont, animateStyle]}>
-          <Chat onMessageSend={this.handleMessageSend} />
           <Message contStyle={style.msgBottom} message={message} />
+          <Chat onMessageSend={this.handleMessageSend} />
         </Animated.View>
         <RoomInfo
           anchor={anchor}

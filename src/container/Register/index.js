@@ -137,6 +137,7 @@ export default class Register extends Component<{}> {
               placeholderTextColor="#fff"
               maxLength={24}
               value={account}
+              underlineColorAndroid="transparent"
               onChangeText={(val) => { this.setState({ account: val }); }}
               style={style.input}
               onSubmitEditing={() => { this.pwd.focus(); }}
@@ -152,6 +153,7 @@ export default class Register extends Component<{}> {
               placeholder="密码"
               placeholderTextColor="#fff"
               maxLength={24}
+              underlineColorAndroid="transparent"
               value={password}
               onChangeText={(val) => { this.setState({ password: val }); }}
               secureTextEntry={true}
@@ -169,6 +171,7 @@ export default class Register extends Component<{}> {
               placeholder="确认密码"
               placeholderTextColor="#fff"
               maxLength={24}
+              underlineColorAndroid="transparent"
               value={confirm}
               onChangeText={(val) => { this.setState({ confirm: val }); }}
               secureTextEntry={true}

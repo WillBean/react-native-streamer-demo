@@ -1,14 +1,10 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { calculatePixel } from '../../common/util/tools';
-
-const { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {
-    width: width - calculatePixel(30),
-    position: 'absolute',
-    left: calculatePixel(15),
-    bottom: calculatePixel(15),
+    marginVertical: calculatePixel(15),
+    marginHorizontal: calculatePixel(15),
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -37,6 +33,7 @@ export default StyleSheet.create({
   avatar: {
     width: calculatePixel(24),
     height: calculatePixel(24),
+    maxHeight: calculatePixel(24),
     borderRadius: calculatePixel(12),
     marginRight: calculatePixel(5),
   },

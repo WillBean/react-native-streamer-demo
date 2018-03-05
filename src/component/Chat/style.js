@@ -1,15 +1,10 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { calculatePixel } from '../../common/util/tools';
-
-const { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {
-    width,
     height: calculatePixel(40),
-    position: 'absolute',
-    left: 0,
-    bottom: calculatePixel(15),
+    marginVertical: calculatePixel(15),
     paddingHorizontal: calculatePixel(15),
     justifyContent: 'center',
     alignItems: 'center',
@@ -30,5 +25,6 @@ export default StyleSheet.create({
     fontSize: calculatePixel(11),
     borderRadius: calculatePixel(15),
     paddingHorizontal: calculatePixel(15),
+    paddingVertical: 0,
   },
 });

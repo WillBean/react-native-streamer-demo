@@ -40,6 +40,7 @@ export default class Chat extends Component<{}> {
           selectionColor="rgba(230,29,114,.6)"
           multiline={false}
           value={inputText}
+          underlineColorAndroid="transparent"
           placeholderTextColor="#bbb"
           onChangeText={text => this.setState({ inputText: text })}
           onSubmitEditing={() => {

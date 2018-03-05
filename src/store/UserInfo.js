@@ -8,7 +8,7 @@ class UserInfo {
   @observable description = '';
   @observable accessToken;
 
-  @action fetch = async () => {
+  @action fetch = () => new Promise(async (resolve, reject) => {
     // 从storage获取
     try {
       const data = await storage.load({
@@ -22,10 +22,12 @@ class UserInfo {
       this.accessToken = accessToken;
       this.avatarImg = avatarImg;
       this.description = description;
+      resolve();
     } catch (err) {
       console.log(`获取用户信息失败: ${JSON.stringify(err)}`);
+      reject(err);
     }
-  }
+  })
 
   @action login = (username, password) => new Promise(async (resolve, reject) => {
     try {
@@ -34,18 +36,22 @@ class UserInfo {
         password,
       });
       const data = await res.json();
-      const { code, accessToken } = data;
+      const {
+        code, accessToken, description, avatarImg,
+      } = data;
       if (code === 0) {
         this.username = username;
         this.accessToken = accessToken;
+        this.description = description;
+        this.avatarImg = avatarImg;
 
         storage.save({
           key: 'userState',
           data: {
             username,
             accessToken,
-            description: this.description,
-            avatarImg: this.avatarImg,
+            description,
+            avatarImg,
           },
         });
         resolve(data);
@@ -116,10 +122,8 @@ class UserInfo {
         accessToken: this.accessToken,
       });
       const data = await res.json();
-      const { code, avatarImg } = data;
+      const { code } = data;
       if (code === 0) {
-        this.avatarImg = avatarImg;
-
         storage.save({
           key: 'userState',
           data: {
@@ -142,6 +146,29 @@ class UserInfo {
   @action setUsername = (val) => {
     this.username = val;
   }
+
+  @action logout = () => new Promise(async (resolve, reject) => {
+    this.username = '';
+    this.avatarImg = '';
+    this.description = '';
+    this.accessToken = '';
+
+    try {
+      await storage.save({
+        key: 'userState',
+        data: {
+          username: this.username,
+          accessToken: this.accessToken,
+          description: this.description,
+          avatarImg: this.avatarImg,
+        },
+      });
+      resolve();
+    } catch (err) {
+      console.log(`用户注销失败: ${JSON.stringify(err)}`);
+      reject(err);
+    }
+  });
 }
 
 export default new UserInfo();

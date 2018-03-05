@@ -7,10 +7,10 @@ export default StyleSheet.create({
   configureCont: {
     paddingHorizontal: calculatePixel(15),
     paddingBottom: calculatePixel(15),
-    position: 'absolute',
-    left: 0,
-    bottom: 0,
-    width,
+    // position: 'absolute',
+    // left: 0,
+    // bottom: 0,
+    // width,
   },
   configure: {
     flexDirection: 'row',

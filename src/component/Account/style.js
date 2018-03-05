@@ -53,4 +53,38 @@ export default StyleSheet.create({
     height: calculatePixel(20),
     width: calculatePixel(20),
   },
+  control: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logoutBtn: {
+    width: calculatePixel(120),
+    height: calculatePixel(45),
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: calculatePixel(5),
+  },
+  text: {
+    fontSize: calculatePixel(16),
+    color: '#fff',
+  },
+  tip: {
+    color: '#aaa',
+    fontSize: calculatePixel(12),
+    marginBottom: calculatePixel(15),
+  },
+  btnArea: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  btn: {
+    width: calculatePixel(90),
+    height: calculatePixel(45),
+    marginHorizontal: calculatePixel(15),
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: calculatePixel(5),
+  },
 });

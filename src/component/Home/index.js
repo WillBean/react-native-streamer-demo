@@ -29,6 +29,7 @@ function formatCards(cards) {
 export default class Home extends Component<{}> {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
+    containerStyle: PropTypes.number,
     liveState: PropTypes.shape({
       list: PropTypes.object,
       fetch: PropTypes.func,
@@ -38,6 +39,7 @@ export default class Home extends Component<{}> {
 
   static defaultProps = {
     liveState: {},
+    containerStyle: null,
   }
 
   constructor(props) {
@@ -49,6 +51,7 @@ export default class Home extends Component<{}> {
   }
 
   componentWillMount() {
+    console.log(1111);
     this.props.liveState.fetch();
   }
   componentWillUnmount() {
@@ -128,11 +131,11 @@ export default class Home extends Component<{}> {
     const { navigator, liveState } = this.props;
     const { list } = liveState;
     const cards = formatCards(list);
-
+    /* eslint-disable */
     return (
       <View style={style.cardListCont}>
-        {cards.map(row => (
-          <View key={Math.random()} style={style.listRow}>
+        {cards.map((row, inx) => (
+          <View key={`card-row-${inx}`} style={style.listRow}>
             {row.map((card) => {
               if (card) {
                 return <Card key={card.liveId} card={card} navigator={navigator} />;
@@ -147,8 +150,9 @@ export default class Home extends Component<{}> {
   }
 
   render() {
+    const { containerStyle } = this.props;
     return (
-      <View style={style.page}>
+      <View style={[style.page, containerStyle]}>
         {this.renderTabBar()}
         <ScrollView
           style={style.scrollCont}

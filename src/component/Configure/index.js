@@ -109,6 +109,7 @@ export default class Configure extends Component<{}> {
             keyboardAppearance="dark"
             selectionColor="rgba(230,29,114,.6)"
             multiline={true}
+            underlineColorAndroid="transparent"
             style={styles.description}
             placeholderTextColor="#888"
             onChangeText={text => this.setState({ description: text })}

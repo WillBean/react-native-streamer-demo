@@ -151,12 +151,12 @@ export default class Live extends Component<{}> {
   }
 
   socketHelper = (roomId) => {
-    const { username: un, avatarImg: ai, accessToken: at } = this.props.userState;
+    const { username: un, accessToken: at } = this.props.userState;
 
-    this.ws = new WebSocket(`${BACK_END_SOCKET_SERVER_URL}/${roomId}/${un}/${ai}/${at}`); // eslint-disable-line
+    this.ws = new WebSocket(`${BACK_END_SOCKET_SERVER_URL}/${roomId}/${un}/${at}`); // eslint-disable-line
 
-    this.ws.onmessage = (data) => {
-      const message = JSON.parse(data);
+    this.ws.onmessage = (socket) => {
+      const message = JSON.parse(socket.data);
       const {
         type, msg, username, avatarImg, currentNumber, msgId,
       } = message;
@@ -172,6 +172,12 @@ export default class Live extends Component<{}> {
           break;
         case 'leave':
           this.pushMessage({ type, username, msgId }, currentNumber);
+          break;
+        case 'error':
+          Alert.alert('出错啦', '抱歉，直播间好像出了点问题 T_T', [
+            { text: '确定', onPress: () => { this.props.navigator.pop(); } },
+          ]);
+          __DEV__ && console.log(msg); // eslint-disable-line
           break;
         default:
       }
@@ -191,28 +197,32 @@ export default class Live extends Component<{}> {
     const { navigator, userState } = this.props;
     const { username, accessToken } = userState;
 
-    navigator.dismissModal({
-      screen: 'Configure',
-    });
-
     if (liveStatus === 'living') {
-      const close = () => {
-        this.ws.close();
-        fetchLiveStop({
-          username,
-          accessToken,
-          liveId: this.liveId,
-        })
-          .then(res => res.json())
-          .then((data) => {
-            if (data.code === 0) {
-              __DEV__ && console.log('退出直播'); // eslint-disable-line
-            }
-          });
-      };
       Alert.alert('结束直播', '您确定要结束直播吗？', [
         { text: '取消', onPress: () => {} },
-        { text: '确定', onPress: close },
+        {
+          text: '确定',
+          onPress: () => {
+            this.ws.close();
+            fetchLiveStop({
+              username,
+              accessToken,
+              liveId: this.liveId,
+            })
+              .then(res => res.json())
+              .then((data) => {
+                if (data.code === 0) {
+                  __DEV__ && console.log('退出直播'); // eslint-disable-line
+                }
+              });
+            StreamerMethod.iOSStopStream();
+            StreamerMethod.stopCameraPreview();
+            StreamerMethod.androidRelease();
+            navigator.dismissModal({
+              screen: 'Configure',
+            });
+          },
+        },
       ], { cancelable: false });
     }
   }
@@ -301,6 +311,9 @@ export default class Live extends Component<{}> {
               });
               StreamerMethod.startCameraPreview();
             }
+          }}
+          onStreamerError={(err) => {
+            console.log(err);
           }}
         />
         {this.renderMask()}

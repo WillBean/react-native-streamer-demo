@@ -22,6 +22,10 @@ export default class Card extends Component<{}> {
     navigator: PropTypes.object.isRequired,
   }
 
+  shouldComponentUpdate(nextProps) {
+    return nextProps.card.currentNumber !== this.props.card.currentNumber;
+  }
+
   render() {
     const { card, navigator } = this.props;
     const {

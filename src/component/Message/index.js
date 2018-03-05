@@ -77,6 +77,8 @@ export default class Message extends Component<{}> {
           onContentSizeChange={() => {
             this.view.scrollToEnd();
           }}
+          scrollsToTop={false}
+          showsVerticalScrollIndicator={false}
         >
           <View style={style.placeholder} />
           {message.length ? message.map(msg => renderMsgItem(msg)) : null}

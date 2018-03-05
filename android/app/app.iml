@@ -92,28 +92,44 @@
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
-    <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android API 24 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="Gradle: recyclerview-v7-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: react-native-0.53.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: support-core-ui-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: staticlayout-proxy-1.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: support-media-compat-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: animated-vector-drawable-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: appcompat-v7-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: support-v4-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: okhttp-urlconnection-3.6.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: ahbottomnavigation-2.0.6" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: jsr305-3.0.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: support-fragment-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: material-menu-1.5.4" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: support-vector-drawable-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: android-jsc-r174650" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: support-compat-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: support-core-utils-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: javax.inject-1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: drawee-1.3.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: fbcore-1.3.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: imagepipeline-okhttp3-1.3.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: textlayoutbuilder-1.0.0" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: staticlayout-proxy-1.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: okhttp-3.6.0" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: appcompat-v7-23.0.1" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: support-v4-23.0.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: material-menu-toolbar-1.5.4" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: design-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: bolts-tasks-1.4.0" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: react-native-0.51.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: fresco-1.3.0" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: okhttp-urlconnection-3.6.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: imagepipeline-1.3.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: transition-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: okio-1.13.0" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: jsr305-3.0.0" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: android-jsc-r174650" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: javax.inject-1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: support-annotations-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: imagepipeline-base-1.3.0" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: support-annotations-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: soloader-0.1.0" level="project" />
+    <orderEntry type="module" module-name="react-native-navigation" exported="" />
+    <orderEntry type="module" module-name="react-native-linear-gradient" exported="" />
     <orderEntry type="module" module-name="react-native-streamer" exported="" />
+    <orderEntry type="module" module-name="react-native-image-picker" exported="" />
   </component>
 </module>
